@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.starwarsbackend</groupId>
 	<artifactId>starwarsbackend</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>starwarsbackend</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -45,6 +45,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+    	<version>1.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+    	<version>3.2.4</version>
 		</dependency>
 	</dependencies>
 
