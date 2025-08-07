@@ -1,9 +1,11 @@
 package com.starwarsbackend.starwarsbackend.planet.model;
 
+import com.starwarsbackend.starwarsbackend.shared.model.Sortable;
+
 import lombok.Data;
 
 @Data
-public class Planet {
+public class Planet implements Sortable {
   private String name;
   private String climate;
   private String gravity;

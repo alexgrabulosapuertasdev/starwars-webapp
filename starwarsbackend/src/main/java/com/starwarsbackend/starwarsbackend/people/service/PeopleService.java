@@ -23,7 +23,7 @@ public class PeopleService {
   public PeoplePaginatedResponse findPeoples(String search, int page, String orderBy, String orderDirection) {
     page = Math.max(page, 1);
     PeoplePaginatedResponse peoples = peopleRepository.getAll();
-    Comparator<People> comparator = generateComparatorToSortPeople(orderBy, orderDirection);
+    Comparator<People> comparator = CommonUtils.generateComparatorToSort(orderBy, orderDirection);
 
     List<People> filtered = peoples.getResults().stream()
         .filter(people -> people.getName().toLowerCase().contains(search.toLowerCase()))
@@ -33,25 +33,5 @@ public class PeopleService {
         .toList();
 
     return new PeoplePaginatedResponse(filtered, page, peoples.getTotal());
-  }
-
-  private Comparator<People> generateComparatorToSortPeople(String orderBy, String orderDirection) {
-    if (CommonUtils.isEmpty(orderBy)) {
-      orderBy = "name";
-    }
-
-    Comparator<People> comparator = switch (orderBy.toLowerCase()) {
-      case "name" -> Comparator.comparing(People::getName, String.CASE_INSENSITIVE_ORDER);
-      case "created" -> Comparator.comparing(People::getCreated);
-      default -> Comparator.comparing(People::getName, String.CASE_INSENSITIVE_ORDER);
-    };
-
-    boolean isReversed = "desc".equalsIgnoreCase(orderDirection);
-
-    if (isReversed) {
-      comparator = comparator.reversed();
-    }
-
-    return comparator;
   }
 }

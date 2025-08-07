@@ -23,7 +23,7 @@ public class PlanetService {
   public PlanetPaginatedResponse findPlanets(String search, int page, String orderBy, String orderDirection) {
     page = Math.max(page, 1);
     PlanetPaginatedResponse planets = planetRepository.getAll();
-    Comparator<Planet> comparator = generateComparatorToSortPlanet(orderBy, orderDirection);
+    Comparator<Planet> comparator = CommonUtils.generateComparatorToSort(orderBy, orderDirection);
 
     List<Planet> filtered = planets.getResults().stream()
         .filter(planet -> planet.getName().toLowerCase().contains(search.toLowerCase()))
@@ -33,25 +33,5 @@ public class PlanetService {
         .toList();
 
     return new PlanetPaginatedResponse(filtered, page, planets.getTotal());
-  }
-
-  private Comparator<Planet> generateComparatorToSortPlanet(String orderBy, String orderDirection) {
-    if (CommonUtils.isEmpty(orderBy)) {
-      orderBy = "name";
-    }
-
-    Comparator<Planet> comparator = switch (orderBy.toLowerCase()) {
-      case "name" -> Comparator.comparing(Planet::getName, String.CASE_INSENSITIVE_ORDER);
-      case "created" -> Comparator.comparing(Planet::getCreated);
-      default -> Comparator.comparing(Planet::getName, String.CASE_INSENSITIVE_ORDER);
-    };
-
-    boolean isReversed = "desc".equalsIgnoreCase(orderDirection);
-
-    if (isReversed) {
-      comparator = comparator.reversed();
-    }
-
-    return comparator;
   }
 }
