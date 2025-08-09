@@ -68,13 +68,26 @@ Each view supports:
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Running Backend Tests
 
 Backend tests are implemented with JUnit and can be run via Maven:
 
+To run the tests, navigate to the `backend` directory and execute:
+
 ```bash
-cd backend
+cd starwarsbackend
 ./mvnw test
+```
+
+## 🧪 Running Frontend Tests
+
+The frontend tests are implemented with Angular's testing utilities and Karma.
+
+To run the tests, navigate to the `frontend` directory and execute:
+
+```bash
+cd starwars-frontend
+npm test
 ```
 
 ## 🔗 Backend API
