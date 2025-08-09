@@ -5,10 +5,11 @@ import { PeopleService } from '../../services/people.service';
 import { FindPaginationDTO } from '../../models/common.types';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { NotFoundMessageComponent } from '../../components/common/not-found/not-found-message/not-found-message.component';
 
 @Component({
   selector: 'app-people.component',
-  imports: [PeopleTableComponent, ReactiveFormsModule],
+  imports: [PeopleTableComponent, ReactiveFormsModule, NotFoundMessageComponent],
   templateUrl: './people.component.html',
   styleUrl: './people.component.scss',
   standalone: true,
@@ -29,6 +30,7 @@ export class PeopleComponent {
     orderBy: 'name',
     orderDirection: 'asc',
   };
+  isSubmitted: boolean = false;
 
   constructor(
     private readonly peopleService: PeopleService,
@@ -48,10 +50,12 @@ export class PeopleComponent {
   private fetchPeoples(findPeopleDTO: FindPaginationDTO): void {
     this.peopleService.findPeoples(findPeopleDTO).subscribe({
       next: (data) => {
+        this.isSubmitted = true;
         this.paginatedPeoples = data;
         this.totalPages = Math.ceil(data.total / 15);
       },
       error: (error) => {
+        this.isSubmitted = true;
         console.error(`Error at find the peoples: ${error}`);
       }
     });

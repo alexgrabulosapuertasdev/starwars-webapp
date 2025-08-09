@@ -14,7 +14,13 @@
     </button>
   </form>
 
-  @if (paginatedPlanets) {
+  @if (paginatedPlanets.results.length > 0) {
     <app-planet-table [planets]="paginatedPlanets.results" [page]="paginatedPlanets.page" [totalPages]="totalPages" (sortChange)="onSortChange($event)" (pageChange)="onPageChange($event)"></app-planet-table>
+  }
+
+  @if (isSubmitted && paginatedPlanets.results.length === 0) {
+    <footer>
+      <app-not-found-message></app-not-found-message>
+    </footer>
   }
 </section>

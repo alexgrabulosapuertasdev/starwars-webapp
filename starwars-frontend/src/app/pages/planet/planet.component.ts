@@ -5,10 +5,11 @@ import { PlanetService } from '../../services/planet.service';
 import { FindPaginationDTO } from '../../models/common.types';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { NotFoundMessageComponent } from '../../components/common/not-found/not-found-message/not-found-message.component';
 
 @Component({
   selector: 'app-planet.component',
-  imports: [PlanetTableComponent, ReactiveFormsModule],
+  imports: [PlanetTableComponent, ReactiveFormsModule, NotFoundMessageComponent],
   templateUrl: './planet.component.html',
   styleUrl: './planet.component.scss',
   standalone: true,
@@ -29,6 +30,7 @@ export class PlanetComponent {
     orderBy: 'name',
     orderDirection: 'asc',
   };
+  isSubmitted: boolean = false;
 
   constructor(
     private readonly planetService: PlanetService,
@@ -48,10 +50,12 @@ export class PlanetComponent {
   private fetchPlanets(findPlanetDTO: FindPaginationDTO): void {
     this.planetService.findPlanets(findPlanetDTO).subscribe({
       next: (data) => {
+        this.isSubmitted = true;
         this.paginatedPlanets = data;
         this.totalPages = Math.ceil(data.total / 15);
       },
       error: (error) => {
+        this.isSubmitted = true;
         console.error(`Error at find the planets: ${error}`);
       }
     });

@@ -14,7 +14,13 @@
     </button>
   </form>
 
-  @if (paginatedPeoples) {
+  @if (paginatedPeoples.results.length > 0) {
     <app-people-table [peoples]="paginatedPeoples.results" [page]="paginatedPeoples.page" [totalPages]="totalPages" (sortChange)="onSortChange($event)" (pageChange)="onPageChange($event)"></app-people-table>
+  }
+
+  @if (isSubmitted && paginatedPeoples.results.length === 0) {
+    <footer>
+      <app-not-found-message></app-not-found-message>
+    </footer>
   }
 </section>
