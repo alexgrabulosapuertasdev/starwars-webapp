@@ -1,0 +1,38 @@
+section {
+  padding: 20px;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    fieldset {
+      border: none;
+
+      input {
+        width: 300px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+    }
+
+    button {
+      background: #496;
+      aspect-ratio: 1;
+      height: 40px;
+      border-radius: 5px;
+      filter: contrast(2);
+    }
+  }
+
+  footer {
+    margin-top: 20px;
+  }
+}

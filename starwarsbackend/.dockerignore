@@ -1,0 +1,5 @@
+target/*.jar
+target/classes
+.git
+node_modules
+*.log

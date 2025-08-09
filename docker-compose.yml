@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./starwarsbackend
+    ports:
+      - "6969:8080"
+    container_name: starwars-backend
+    networks:
+      - starwars-network
+
+  frontend:
+    build:
+      context: ./starwars-frontend
+    ports:
+      - "4200:80"
+    container_name: starwars-frontend
+    networks:
+      - starwars-network
+    depends_on:
+      - backend
+
+networks:
+  starwars-network:
+    driver: bridge

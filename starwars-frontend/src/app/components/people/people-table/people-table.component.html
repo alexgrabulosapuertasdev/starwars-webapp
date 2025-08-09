@@ -1,0 +1,49 @@
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Name <span (click)="onSortChange('name')"><img src="assets/icons/arrow-sort.svg" alt="Sort" title="Sort" /></span></th>
+        <th>Height</th>
+        <th>Mass</th>
+        <th>Birth Year</th>
+        <th>Gender</th>
+        <th>Created at <span (click)="onSortChange('created')"><img src="assets/icons/arrow-sort.svg" alt="Sort" title="Sort" /></span></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for(people of peoples; track people) {
+        <tr>
+          <td>{{ people.name }}</td>
+          <td>{{ people.height }}</td>
+          <td>{{ people.mass }}</td>
+          <td>{{ people.birthYear }}</td>
+          <td>{{ people.gender }}</td>
+          <td>{{ people.created | date }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <footer>
+    <div class="footer__buttons">
+      <button (click)="onPageChange(1)" [disabled]="page === 1">
+      <img src="assets/icons/chevron-left-pipe.svg" alt="Go at page 1" title="Go at page 1" />
+    </button>
+
+    <button (click)="onPageChange(page - 1)" [disabled]="page === 1">
+      <img src="assets/icons/chevron-left.svg" alt="Go one page back" title="Go one page back" />
+    </button>
+
+    <span>Page {{ page }} of {{ totalPages }}</span>
+
+    <button (click)="onPageChange(page + 1)" [disabled]="page === totalPages">
+      <img src="assets/icons/chevron-right.svg" alt="Go one page more" title="Go one page more" />
+    </button>
+
+    <button (click)="onPageChange(totalPages)" [disabled]="page === totalPages">
+      <img src="assets/icons/chevron-right-pipe.svg" alt="Go at last page" title="Go at page 1" />
+    </button>
+    </div>
+  </footer>
+</section>

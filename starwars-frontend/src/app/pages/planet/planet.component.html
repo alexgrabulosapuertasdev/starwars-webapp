@@ -1,0 +1,30 @@
+<section>
+  <h2>
+    Planets: {{ paginatedPlanets.total }}
+  </h2>
+
+  @if (error) {
+    <app-error-notification [title]="error.title" [message]="error.message" (closeEvent)="closeNotificationError()"></app-error-notification>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSearchChange()">
+    <fieldset>
+      <label for="search">Search: </label>
+      <input id="search" formControlName="search" type="text">
+    </fieldset>
+
+    <button type="submit" [disabled]="form.invalid">
+       <img src="assets/icons/search.svg" alt="Search" title="Search" />
+    </button>
+  </form>
+
+  @if (paginatedPlanets.results.length > 0) {
+    <app-planet-table [planets]="paginatedPlanets.results" [page]="paginatedPlanets.page" [totalPages]="totalPages" (sortChange)="onSortChange($event)" (pageChange)="onPageChange($event)"></app-planet-table>
+  }
+
+  @if (isSubmitted && paginatedPlanets.results.length === 0) {
+    <footer>
+      <app-not-found-message></app-not-found-message>
+    </footer>
+  }
+</section>
