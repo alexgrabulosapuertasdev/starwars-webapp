@@ -28,10 +28,13 @@ public class PlanetService {
     List<Planet> filtered = planets.getResults().stream()
         .filter(planet -> planet.getName().toLowerCase().contains(search.toLowerCase()))
         .sorted(comparator)
+        .toList();
+
+    List<Planet> paginatedResults = filtered.stream()
         .skip((page - 1) * 15)
         .limit(15)
         .toList();
 
-    return new PlanetPaginatedResponse(filtered, page, planets.getTotal());
+    return new PlanetPaginatedResponse(paginatedResults, page, filtered.size());
   }
 }

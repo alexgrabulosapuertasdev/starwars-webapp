@@ -28,10 +28,13 @@ public class PeopleService {
     List<People> filtered = peoples.getResults().stream()
         .filter(people -> people.getName().toLowerCase().contains(search.toLowerCase()))
         .sorted(comparator)
+        .toList();
+
+    List<People> paginatedResults = filtered.stream()
         .skip((page - 1) * 15)
         .limit(15)
         .toList();
 
-    return new PeoplePaginatedResponse(filtered, page, peoples.getTotal());
+    return new PeoplePaginatedResponse(paginatedResults, page, filtered.size());
   }
 }
