@@ -6,10 +6,11 @@ import { FindPaginationDTO } from '../../models/common.types';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { NotFoundMessageComponent } from '../../components/common/not-found/not-found-message/not-found-message.component';
+import { ErrorNotificationComponent } from '../../components/common/error/error-notification/error-notification.component';
 
 @Component({
   selector: 'app-people.component',
-  imports: [PeopleTableComponent, ReactiveFormsModule, NotFoundMessageComponent],
+  imports: [PeopleTableComponent, ReactiveFormsModule, NotFoundMessageComponent, ErrorNotificationComponent],
   templateUrl: './people.component.html',
   styleUrl: './people.component.scss',
   standalone: true,
@@ -31,6 +32,7 @@ export class PeopleComponent {
     orderDirection: 'asc',
   };
   isSubmitted: boolean = false;
+  error: { title: string; message: string } | null = null;
 
   constructor(
     private readonly peopleService: PeopleService,
@@ -56,6 +58,10 @@ export class PeopleComponent {
       },
       error: (error) => {
         this.isSubmitted = true;
+        this.error = {
+          title: 'Error fetching peoples',
+          message: 'An unexpected error occurred while fetching peoples.',
+        };
         console.error(`Error at find the peoples: ${error}`);
       }
     });
@@ -83,5 +89,9 @@ export class PeopleComponent {
     this.findPeopleDTO.page = 1;
 
     this.fetchPeoples(this.findPeopleDTO);
+  }
+
+  closeNotificationError(): void {
+    this.error = null;
   }
 }

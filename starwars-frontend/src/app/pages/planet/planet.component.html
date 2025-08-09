@@ -3,6 +3,10 @@
     Planets: {{ paginatedPlanets.total }}
   </h2>
 
+  @if (error) {
+    <app-error-notification [title]="error.title" [message]="error.message" (closeEvent)="closeNotificationError()"></app-error-notification>
+  }
+
   <form [formGroup]="form" (ngSubmit)="onSearchChange()">
     <fieldset>
       <label for="search">Search: </label>

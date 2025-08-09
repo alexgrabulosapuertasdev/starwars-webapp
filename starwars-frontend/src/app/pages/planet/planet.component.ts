@@ -6,10 +6,12 @@ import { FindPaginationDTO } from '../../models/common.types';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { NotFoundMessageComponent } from '../../components/common/not-found/not-found-message/not-found-message.component';
+import { ErrorNotificationComponent } from '../../components/common/error/error-notification/error-notification.component';
+
 
 @Component({
   selector: 'app-planet.component',
-  imports: [PlanetTableComponent, ReactiveFormsModule, NotFoundMessageComponent],
+  imports: [PlanetTableComponent, ReactiveFormsModule, NotFoundMessageComponent, ErrorNotificationComponent],
   templateUrl: './planet.component.html',
   styleUrl: './planet.component.scss',
   standalone: true,
@@ -31,6 +33,7 @@ export class PlanetComponent {
     orderDirection: 'asc',
   };
   isSubmitted: boolean = false;
+  error: { title: string; message: string } | null = null;
 
   constructor(
     private readonly planetService: PlanetService,
@@ -56,6 +59,10 @@ export class PlanetComponent {
       },
       error: (error) => {
         this.isSubmitted = true;
+        this.error = {
+          title: 'Error fetching planets',
+          message: 'An unexpected error occurred while fetching planets.',
+        };
         console.error(`Error at find the planets: ${error}`);
       }
     });
@@ -83,5 +90,9 @@ export class PlanetComponent {
     this.findPlanetDTO.page = 1;
 
     this.fetchPlanets(this.findPlanetDTO);
+  }
+
+  closeNotificationError(): void {
+    this.error = null;
   }
 }

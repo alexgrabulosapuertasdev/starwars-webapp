@@ -1,0 +1,38 @@
+section {
+  position: absolute;
+  background: #ff7488;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #ff002b;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+
+      h4 {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+
+      button {
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+
+        &:hover {
+          color: #ff002b;
+        }
+      }
+  }
+
+  p {
+    margin: 0;
+
+    &:first-of-type {
+      margin-bottom: 10px;
+    }
+  }
+}
