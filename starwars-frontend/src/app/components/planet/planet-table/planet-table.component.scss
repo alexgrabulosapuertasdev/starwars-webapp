@@ -1,0 +1,59 @@
+section {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    .footer__buttons {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+
+        &:disabled {
+          opacity: 0.2;
+          cursor: not-allowed;
+        }
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}
