@@ -52,6 +52,32 @@ This will start two services:
 
 ---
 
+## 💻 Running Locally (without Docker)
+
+### Backend
+
+Make sure you have Java 17 and Maven installed. Then:
+
+```bash
+cd starwarsbackend
+./mvn clean install
+./mvnw spring-boot:run
+```
+
+Backend will run on: http://localhost:8080
+
+### Frontend
+
+Make sure you have node and npm installed. Then:
+
+```bash
+cd starwars-frontend
+npm install
+npm start
+```
+
+Frontend will run on: http://localhost:4200
+
 ## 🖥 Usage
 
 Open the frontend in your browser at `http://localhost:4200`.
