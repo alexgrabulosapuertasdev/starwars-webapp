@@ -7,7 +7,7 @@ A microservices-based web application that displays data about Star Wars **Peopl
 ## 🏗 Architecture
 
 - **Backend:** Java 17, Spring Boot REST API
-- **Frontend:** Angular 17 SPA (Single Page Application)
+- **Frontend:** Angular 20 SPA (Single Page Application)
 - **Containerization:** Docker Compose orchestrates backend and frontend services
 
 ---
