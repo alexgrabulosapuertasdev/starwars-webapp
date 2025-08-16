@@ -31,7 +31,7 @@ A microservices-based web application that displays data about Star Wars **Peopl
 For local development (optional):
 
 - Java 17 and Maven
-- Node.js (v18+) and Angular CLI
+- Node.js (v20+) and Angular CLI
 
 ---
 
